@@ -1,0 +1,68 @@
+[
+    {
+        "Title": "Going to port / Pójście do portu",
+        "TitleGeneric": "Teleportation / Teleportacja",
+        "Description": "Bohater przechodzi z lasu do portu, strażnik statku udaje się na zakupy prowiantu do portu.",
+        "Override": 0,
+    },
+    
+    {
+        "Title": "Black Wizard takes over ship / Czarny czarodziej przejmuje statek",
+        "TitleGeneric": "Character's feature change / Zmiana własności postaci",
+        "Description": "Czarny czarodziej zamyka kapitana i przejmuje cały statek dla siebie blokując możliwość dostania się na niego.",
+        "Override": 0,
+    },
+    
+    {
+        "Title": "Free the ship's capitan and go to the island / Uwolnienie kapitana statku i wypłynięcie na wyspę",
+        "TitleGeneric": "Teleportation / Teleportacja",
+        "Description": "Kapitan po uwolnieniu z wdzięczności zabiera bohatera na wyspę.",
+        "Override": 0,
+    },
+
+  {
+    "Title": "Location change with return possibility / Zmiana lokacji z możliwością powrotu",
+    "TitleGeneric": "Teleportation / Teleportacja",
+    "Description": "Bohater przechodzi z lokacji do lokacji.",
+    "Override": 0,
+    "LSide": {
+      "Locations": [
+        {
+          "Id": "Lokacja_A",
+          "Attributes": {},
+          "Characters": [
+            {
+              "Id": "Bohater",
+              "IsObject": true,
+              "Attributes": {},
+              "Characters": [],
+              "Items": []
+            }
+          ],
+          "Items": [],
+          "Connections": [
+            {
+              "Destination": "Lokacja_B"
+            }
+          ]
+        },
+        {
+          "Id": "Lokacja_B",
+          "Connections": [
+            {
+              "Destination": "Lokacja_A"
+            }
+          ]
+        }
+      ]
+    },
+    "RSide": {},
+    "Instructions": [
+      {
+        "Op": "move",
+        "Node": "Bohater",
+        "To": "Lokacja_B/Characters"
+      }
+    ]
+  }
+]
