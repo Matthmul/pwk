@@ -20,6 +20,132 @@
         "Override": 0,
     },
 
+    {
+        "Title": "Fight with black wizard using the stick/ Walka z czarnym czarodziejem przy pomocy kija",
+        "TitleGeneric": "Fight ending with character’s death / Walka zakończona śmiercią uczestnika",
+        "Description": "Bohater bez magicznego kija nie ma szans na pokonanie potężnego czarnego czarodzieja.",
+        "Override": 0,
+        "LSide": {
+          "Locations": [
+            {
+              "Id": "Port",
+              "Attributes": {},
+              "Characters": [
+                {
+                  "Id": "Main_character",
+                  "IsObject": true,
+                  "Attributes": {
+                    "HP": null
+                  },
+                  "Items": [
+                               {
+                                "Name": "Wizard_stick",
+                                "Attributes": {
+                                },
+                                "Characters": [],
+                                "Items": []
+                            }
+                  ]
+                },
+                {
+                  "Id": "Black_wizard",
+                  "IsObject": true,
+                  "Attributes": {
+                    "HP": null
+                  },
+                  "Characters": [],
+                  "Items": []
+                }
+              ],
+              "Items": [],
+              "Connections": []
+            }
+          ]
+        },
+        "RSide": {},
+        "Preconditions": [
+          {
+            "Cond": "Black_wizard.HP >= Main_character.HP"
+          }
+        ],
+        "Instructions": [
+          {
+            "Op": "set",
+            "Attribute": "Black_wizard.IsDead",
+            "Value": true
+          },
+          {
+            "Op": "set",
+            "Attribute": "Main_character.HP",
+            "Expr": "Main_character.HP / 2"
+          },
+          {
+            "Op": "move",
+            "Nodes": "Black_wizard/Items/*",
+            "To": "Port/Items"
+          }
+        ]
+    },
+    
+    {
+        "Title": "Fight with black wizard without stick/ Walka z czarnym czarodziejem bez kija",
+        "TitleGeneric": "Fight ending with character’s death / Walka zakończona śmiercią uczestnika",
+        "Description": "Bohater bez magicznego kija nie ma szans na pokonanie potężnego czarnego czarodzieja.",
+        "Override": 0,
+        "LSide": {
+          "Locations": [
+            {
+              "Id": "Port",
+              "Attributes": {},
+              "Characters": [
+                {
+                  "Id": "Main_character",
+                  "IsObject": true,
+                  "Attributes": {
+                    "HP": null
+                  },
+                  "Items": []
+                },
+                {
+                  "Id": "Black_wizard",
+                  "IsObject": true,
+                  "Attributes": {
+                    "HP": null
+                  },
+                  "Characters": [],
+                  "Items": []
+                }
+              ],
+              "Items": [],
+              "Connections": []
+            }
+          ]
+        },
+        "RSide": {},
+        "Preconditions": [
+          {
+            "Cond": "Black_wizard.HP >= Main_character.HP"
+          }
+        ],
+        "Instructions": [
+          {
+            "Op": "set",
+            "Attribute": "Main_character.IsDead",
+            "Value": true
+          },
+          {
+            "Op": "set",
+            "Attribute": "Black_wizard.HP",
+            "Expr": "Black_wizard.HP - Main_character.HP / 2"
+          },
+          {
+            "Op": "move",
+            "Nodes": "Main_character/Items/*",
+            "To": "Port/Items"
+          }
+        ]
+    },
+    
   {
     "Title": "Location change with return possibility / Zmiana lokacji z możliwością powrotu",
     "TitleGeneric": "Teleportation / Teleportacja",
