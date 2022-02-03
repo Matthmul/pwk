@@ -1,0 +1,733 @@
+[
+    {
+        "Title": "Black Wizard takes over ship when main characer came into port / Czarny czarodziej przejmuje statek kiedy bohater wchodzi do portu",
+        "Title_Generic": "Teleportation / Teleportacja",
+        "Description": "Czarny czarodziej zamyka kapitana i przejmuje cały statek. Jednakże udaje się jednemu strażnikowi zbiec.",
+        "Override": 0,
+        "L_Side": {
+          "Locations": [
+            {
+              "Id": "Port",
+              "Attributes": {},
+              "Characters": [
+                {
+                  "Id": "Main_hero",
+                  "Attributes": {},
+                  "Characters": [],
+                  "Items": [
+                           {
+                              "Id": "Wizard_stick",
+                              "Attributes": {},
+                              "Characters": [],
+                              "Items": []
+                            }
+                    ],
+                "Narration": []
+                }
+              ],
+              "Items": [],
+              "Connections": []
+            },
+            {
+              "Id": "Anywhere",
+              "Characters": [
+                {
+                  "Name": "Ship_guard"
+                }
+              ]
+            }
+          ]
+        },
+        "R_Side": {},
+        "Preconditions": [],
+        "Instructions": [
+          {
+            "op": "create",
+            "in": "Main_hero/Narration",
+            "sheaf": {
+              "Name": "Black_wizard_take_ship",
+              "Attributes": {
+                    "knowledge": "Czarny czarodziej przejął statek"
+              }
+            }
+          },
+          {
+            "op": "move",
+            "node": "Ship_guard",
+            "to": "Port/Characters"
+          }
+        ]
+    },
+
+    {
+      "Title": "Trying to discuss with ship captain / Próba rozmowy z kapitanem statku",
+      "Title_Generic": "Getting knowledge from conversation / Rozmowa z przekazaniem informacji",
+      "Description": "Podczas proby kontaktu z kapitanem, głowny bohater zostaje zabity przez Czarnego Czarodzieja",
+      "Override": 0,
+      "L_Side": {
+        "Locations": [
+          {
+            "Id": "Ship",
+            "Attributes": {},
+            "Characters": [
+              {
+                "Id": "Main_hero",
+                "Attributes": {},
+                "Characters": [],
+                "Items": [
+                         {
+                            "Id": "Wizard_stick",
+                            "Attributes": {},
+                            "Characters": [],
+                            "Items": []
+                          }
+                ],
+              "Narration": [
+                {
+                  "Id": "Black_wizard_take_ship",
+                  "Attributes": {
+                    "Knowledge": "Czarny czarodziej przejął statek"
+                  },
+                  "Characters": [],
+                  "Items": []
+                }
+                ]
+              },
+              {
+                "Id": "Ship_captain",
+                "Attributes": {},
+                "Characters": [],
+                "Items": []
+              }
+            ],
+            "Items": [],
+            "Connections": []
+          }
+        ]
+      },
+      "R_Side": {},
+      "Preconditions": [],
+      "Instructions": [
+        {
+          "op": "set",
+          "attribute": "Main_hero.IsDead",
+          "value": true
+        },
+        {
+          "op": "move",
+          "nodes": "Main_hero/Items/*",
+          "to": "Ship/Items"
+        }
+      ]
+    },
+            
+    {
+      "Title": "Discussion with ship guard / Rozmowa ze strażnikiem",
+      "Title_Generic": "Getting knowledge from conversation / Rozmowa z przekazaniem informacji",
+      "Description": "Główny bohater podczas rozmowy ze zbiegłym strażnikiem statku, dowiaduje się, że do wypłynięcia Czarnemu Czarodziejowi niezbędny jest kompas",
+      "Override": 0,
+      "L_Side": {
+        "Locations": [
+          {
+            "Id": "Port",
+            "Attributes": {},
+            "Characters": [
+              {
+                "Id": "Main_hero",
+                "Attributes": {},
+                "Characters": [],
+                "Items": [
+                         {
+                              "Id": "Wizard_stick",
+                              "Attributes": {},
+                              "Characters": [],
+                              "Items": []
+                          }
+                  ],
+              "Narration": []
+              },
+              {
+                "Id": "Ship_guard",
+                "Attributes": {},
+                "Characters": [],
+                "Items": []
+              }
+            ],
+            "Items": [],
+            "Connections": []
+          }
+        ]
+      },
+      "R_Side": {},
+      "Preconditions": [],
+      "Instructions": [
+        {
+          "op": "create",
+          "in": "Main_hero/Narration",
+          "sheaf": {
+            "Name": "Black_wizard_need_compass",
+            "Attributes": {
+                  "knowledge": "Czarny czarodziej potrzebuje kompasu do wypłenięcia statkiem"
+            }
+          }
+        }
+      ]
+    },
+        
+    {
+      "Title": "Replacing compass for a black wizard stick / Wymiana kija czarodzieja na kompas",
+      "Title_Generic": "Exchanging item for item / Wymiana przedmiotu na przedmiot",
+      "Description": "Główny bohater wymienia kij czarodzieja na kompas, ma nadzieję że będzie to dobra decyzja",
+      "Override": 0,
+      "L_Side": {
+        "Locations": [
+          {
+            "Id": "Tavern",
+            "Attributes": {},
+            "Characters": [
+              {
+                "Id": "Main_hero",
+                "Attributes": {},
+                "Items": [
+                  {
+                    "Id": "Wizard_stick",
+                    "Attributes": {}
+                  }
+                ]
+              },
+              {
+                "Id": "Traveler",
+                "Attributes": {},
+                "Characters": [],
+                "Items": [
+                  {
+                    "Id": "Compass",
+                    "Attributes": {}
+                  }
+                ]
+              }
+            ],
+            "Items": [],
+            "Connections": []
+          }
+        ]
+      },
+      "R_Side": {},
+      "Preconditions": [],
+      "Instructions": [
+        {
+          "op": "move",
+          "node": "Compass",
+          "to": "Main_hero/Items"
+        },
+        {
+          "op": "move",
+          "node": "Wizard_stick",
+          "to": "Traveler/Items"
+        }
+      ]
+    },
+    
+    {
+        "Title": "Buying compass / Zakup kompasu za pieniądze",
+        "Title_Generic": "Making a deal / Transakcja kupna-sprzedaży",
+        "Description": "Główny bohater kupuje kompas za 100 monet od podróżnika",
+        "Override": 0,
+        "L_Side": {
+          "Locations": [
+            {
+              "Id": "Tavern",
+              "Attributes": {},
+              "Characters": [
+                {
+                  "Id": "Main_hero",
+                  "Attributes": {
+                    "Money": 100
+                  }
+                },
+                {
+                  "Id": "Traveler",
+                  "Attributes": {},
+                  "Characters": [],
+                  "Items": [
+                    {
+                      "Id": "Compass",
+                      "Attributes": {
+                        "Value": 100
+                      }
+                    }
+                  ]
+                }
+              ],
+              "Items": [],
+              "Connections": []
+            }
+          ]
+        },
+        "R_Side": {},
+        "Preconditions": [
+          {
+            "cond": "Main_hero.Money >= Compass.Value"
+          }
+        ],
+        "Instructions": [
+          {
+            "op": "move",
+            "node": "Compass",
+            "to": "Main_hero/Items"
+          },
+          {
+            "op": "set",
+            "attribute": "Main_hero.Money",
+            "expr": "Main_hero.Money - Compass.Value"
+          },
+          {
+            "op": "set",
+            "attribute": "Traveler.Money",
+            "expr": "Traveler.Money + Compass.Value"
+          }
+        ]
+    },
+
+    {
+      "Title": "Accept to join black wizard / Zgoda na dołączenie do czarnego czarodzieja",
+      "Title_Generic": "Getting knowledge from conversation / Rozmowa z przekazaniem informacji",
+      "Description": "Główny bohater po dowiedzeniu się, że Czarny Czarodziej wspiera Czerwoną rasę, która imponuje głównemu bohaterowi, decyduje się do niego dołaczyć w zamian za kompas",
+      "Override": 0,
+      "L_Side": {
+        "Locations": [
+          {
+            "Id": "Port",
+            "Attributes": {},
+            "Characters": [
+              {
+                "Id": "Main_hero",
+                "Attributes": {},
+                "Characters": [],
+                "Items": [
+                           {
+                              "Name": "Compass",
+                              "Attributes": {
+                              },
+                              "Characters": [],
+                              "Items": []
+                          },
+                         {
+                              "Name": "Wizard_stick",
+                              "Attributes": {
+                              },
+                              "Characters": [],
+                              "Items": []
+                          }
+                  ],
+              "Narration": [
+                  {
+                    "Id": "Black_wizard_need_compass",
+                    "Attributes": {
+                      "Knowledge": "Czarny czarodziej potrzebuje kompasu do wypłenięcia statkiem"
+                    },
+                    "Characters": [],
+                    "Items": []
+                  }
+                ]
+              },
+              {
+                "Id": "Black_wizard",
+                "Attributes": {},
+                "Characters": [],
+                "Items": []
+              }
+            ],
+            "Items": [],
+            "Connections": []
+          }
+        ]
+      },
+      "R_Side": {},
+      "Preconditions": [],
+      "Instructions": [
+        {
+          "op": "create",
+          "in": "Main_hero/Narration",
+          "sheaf": {
+            "Name": "Main_hero_agreed_to_join_black_wizard",
+            "Attributes": {
+              "Knowledge": "Główny bohater dołączył do Czarnego Czardzieja"
+            }
+          }
+        },
+        {
+          "op": "delete",
+          "node": "Main_hero/Items/Compass"
+        },
+        {
+          "op": "delete",
+          "node": "Main_hero/Items/Wizard_stick"
+        }
+      ]
+    },
+    
+    {
+      "Title": "Refusal to join black wizard / Odmówienie na dołączenie do czarnego czarodzieja",
+      "Title_Generic": "Getting knowledge from conversation / Rozmowa z przekazaniem informacji",
+      "Description": "Główny bohater mimo namów, nie decyduje się przejść na stronę Czarnego Czarodzieja. Tym samym spada na głównego bohatera gniew złego maga.",
+      "Override": 0,
+      "L_Side": {
+        "Locations": [
+          {
+            "Id": "Port",
+            "Attributes": {},
+            "Characters": [
+              {
+                "Id": "Main_hero",
+                "Attributes": {},
+                "Characters": [],
+                "Items": [
+                          {
+                              "Name": "Wizard_stick",
+                              "Attributes": {
+                              },
+                              "Characters": [],
+                              "Items": []
+                          }
+                ],
+                "Narration": [
+                  {
+                    "Id": "Black_wizard_need_compass",
+                    "Attributes": {
+                      "Knowledge": "Czarny czarodziej potrzebuje kompasu do wypłenięcia statkiem"
+                    },
+                    "Characters": [],
+                    "Items": []
+                  }
+                ]
+              },
+              {
+                "Id": "Black_wizard",
+                "Attributes": {},
+                "Characters": [],
+                "Items": []
+              }
+            ],
+            "Items": [],
+            "Connections": []
+          }
+        ]
+      },
+      "R_Side": {},
+      "Preconditions": [],
+      "Instructions": [
+        {
+          "op": "create",
+          "in": "Main_hero/Narration",
+          "sheaf": {
+            "Name": "Main_hero_refuse_to_join_black_wizard",
+            "Attributes": {
+              "Knowledge": "Główny bohater nie dołączył do Czarnego Czardzieja"
+            }
+          }
+        }
+      ]
+    },
+    
+    {
+      "Title": "Fight with black wizard using the stick / Walka z czarnym czarodziejem przy pomocy kija",
+      "Title_Generic": "Fight ending with character’s death / Walka zakończona śmiercią uczestnika",
+      "Description": "Bohater z magicznym kijem łatwo pokonuje potężnego czarnego czarodzieja.",
+      "Override": 0,
+      "L_Side": {
+        "Locations": [
+          {
+            "Id": "Port",
+            "Attributes": {},
+            "Characters": [
+              {
+                "Id": "Main_hero",
+                "Attributes": {
+                  "HP": null
+                },
+                "Items": [
+                  {
+                    "Name": "Wizard_stick",
+                    "Attributes": {
+                    },
+                    "Characters": [],
+                    "Items": []
+                  }
+                ],
+                "Narration": [
+                {
+                  "Id": "Black_wizard_take_ship",
+                  "Attributes": {
+                    "Knowledge": "Czarny czarodziej przejął statek"
+                  },
+                  "Characters": [],
+                  "Items": []
+                }
+                ]
+              },
+              {
+                "Id": "Black_wizard",
+                "Attributes": {
+                  "HP": null
+                },
+                "Characters": [],
+                "Items": []
+              }
+            ],
+            "Items": [],
+            "Connections": []
+          }
+        ]
+      },
+      "R_Side": {},
+      "Preconditions": [
+        {
+          "cond": "Black_wizard.HP >= Main_hero.HP"
+        }
+      ],
+      "Instructions": [
+        {
+          "op": "set",
+          "attribute": "Black_wizard.IsDead",
+          "value": true
+        },
+        {
+          "op": "delete",
+          "node": "Main_hero/Narration/Black_wizard_take_ship"
+        },
+        {
+          "op": "create",
+          "in": "Main_hero/Narration",
+          "sheaf": {
+            "Id": "Captain_gratitude",
+            "Attributes": {
+              "Knowledge": "Kapitan jest wdzięczny za uratowanie statku"
+            }
+          }
+        },
+        {
+          "op": "set",
+          "attribute": "Main_hero.HP",
+          "expr": "Main_hero.HP / 2"
+        },
+        {
+          "op": "move",
+          "nodes": "Black_wizard/Items/*",
+          "to": "Port/Items"
+        }
+      ]
+    },
+    
+    {
+      "Title": "Fight with black wizard without stick / Walka z czarnym czarodziejem bez kija",
+      "Title_Generic": "Fight ending with character’s death / Walka zakończona śmiercią uczestnika",
+      "Description": "Bohater bez magicznego kija nie ma szans na pokonanie potężnego czarnego czarodzieja.",
+      "Override": 0,
+      "L_Side": {
+        "Locations": [
+          {
+            "Id": "Port",
+            "Attributes": {},
+            "Characters": [
+              {
+                "Id": "Main_hero",
+                "Attributes": {
+                  "HP": null
+                },
+                "Items": []
+              },
+              {
+                "Id": "Black_wizard",
+                "Attributes": {
+                  "HP": null
+                },
+                "Characters": [],
+                "Items": []
+              }
+            ],
+            "Items": [],
+            "Connections": []
+          }
+        ]
+      },
+      "R_Side": {},
+      "Preconditions": [
+        {
+          "cond": "Black_wizard.HP >= Main_hero.HP"
+        }
+      ],
+      "Instructions": [
+        {
+          "op": "set",
+          "attribute": "Main_hero.IsDead",
+          "value": true
+        },
+        {
+          "op": "set",
+          "attribute": "Black_wizard.HP",
+          "expr": "Black_wizard.HP - Main_hero.HP / 2"
+        },
+        {
+          "op": "move",
+          "nodes": "Main_hero/Items/*",
+          "to": "Port/Items"
+        }
+      ]
+    },
+
+    {
+      "Title": "Attempting to sail with a compass / Próba wypłynięcia z kompasem",
+      "Title_Generic": "Teleportation / Teleportacja",
+      "Description": "Kapitan po uwolnieniu zauważa kompas w rękach głównego bohatera, przez co proponuje bohaterowi uczestnictwo w żegludze i zabiera bohatera na wyspę.",
+      "Override": 0,
+      "L_Side": {
+        "Locations": [
+          {
+            "Id": "Ship",
+            "Attributes": {},
+            "Characters": [
+              {
+                "Id": "Main_hero",
+                "Attributes": {},
+                "Characters": [],
+                "Items": [
+                         {
+                              "Name": "Compass",
+                              "Attributes": {
+                              },
+                              "Characters": [],
+                              "Items": []
+                          }
+                ],
+              "Narration": [
+                  {
+                    "Id": "Captain_gratitude",
+                    "Attributes": {
+                      "Knowledge": "Kapitan jest wdzięczny za uratowanie statku"
+                    },
+                    "Characters": [],
+                    "Items": []
+                  }
+                ]
+              }
+            ],
+            "Items": []
+          },
+          {
+            "Id": "Island",
+            "Connections": []
+          }
+        ]
+      },
+      "R_Side": {},
+      "Instructions": [
+        {
+          "op": "move",
+          "node": "Main_hero",
+          "to": "Island/Characters"
+        },
+        {
+          "op": "delete",
+          "node": "Main_hero/Items/Compass"
+        }
+      ]
+    },
+
+    {
+      "Title": "Attempting to sail without a compass / Próba wypłynięcia bez kompasu",
+      "Title_Generic": "Teleportation / Teleportacja",
+      "Description": "Kapitan po uwolnieniu z wdzięczności proponuje udział w żegludze, jednak zaznacza, że bez kompasu jest ona niemożliwa",
+      "Override": 0,
+      "L_Side": {
+        "Locations": [
+          {
+            "Id": "Port",
+            "Attributes": {},
+            "Characters": [
+              {
+                "Id": "Main_hero",
+                "Attributes": {},
+                "Characters": [],
+                "Items": [],
+                  "Narration": [
+                  {
+                    "Id": "Captain_gratitude",
+                    "Attributes": {
+                      "Knowledge": "Kapitan jest wdzięczny za uratowanie statku"
+                    },
+                    "Characters": [],
+                    "Items": []
+                  }
+                ]
+              }
+            ],
+            "Items": []
+          },
+          {
+            "Id": "Island",
+            "Connections": []
+          }
+        ]
+      },
+      "R_Side": {},
+      "Instructions": [
+          {
+              "op": "delete",
+              "node": "Main_hero/Narration/Captain_gratitude"
+          }
+      ]
+    },
+
+    {
+        "Title": "Sail to the island with the black wizard / Wypłynięcie na wyspę z czarnym czarodziejem",
+        "Title_Generic": "Teleportation / Teleportacja",
+        "Description": "Czarny Czarodziej wraz z głównym bohaterem wypływają z portu w celu szerzenia ideologii Czerwonej Rasy na wyspie",
+        "Override": 0,
+        "L_Side": {
+          "Locations": [
+            {
+              "Id": "Port",
+              "Attributes": {},
+              "Characters": [
+                {
+                  "Id": "Main_hero",
+                  "Attributes": {},
+                  "Characters": [],
+                  "Items": [],
+                  "Narration": [
+                      {
+                        "Name": "Main_hero_agreed_to_join_black_wizard",
+                        "Attributes": {
+                          "Knowledge": "Główny bohater dołączył do Czarnego Czardzieja"
+                        },
+                        "Characters": [],
+                        "Items": []
+                      }
+                    ]
+                },
+                {
+                  "Id": "Black_wizard",
+                  "Attributes": {},
+                  "Characters": [],
+                  "Items": []
+                }
+              ],
+              "Items": []
+            },
+            {
+              "Id": "Island",
+              "Connections": []
+            }
+          ]
+        },
+        "R_Side": {},
+        "Instructions": [
+          {
+            "op": "move",
+            "node": "Main_hero",
+            "to": "Island/Characters"
+          }
+        ]
+    }
+]
