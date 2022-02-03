@@ -1,9 +1,124 @@
 [
     {
         "Title": "Black Wizard takes over ship when main characer came into port / Czarny czarodziej przejmuje statek kiedy bohater wchodzi do portu",
-        "Title_Generic": "Character's feature change / Zmiana własności postaci",
-        "Description": "Czarny czarodziej zamyka kapitana i przejmuje cały statek.",
-        "Override": 0, # TODO dokończyć
+        "Title_Generic": "Teleportation / Teleportacja",
+        "Description": "Czarny czarodziej zamyka kapitana i przejmuje cały statek. Jednakże udaje się jednemu strażnikowi zbiec.",
+        "Override": 0,
+        "L_Side": {
+          "Locations": [
+            {
+              "Id": "Port",
+              "Attributes": {},
+              "Characters": [
+                {
+                  "Id": "Main_hero",
+                  "Attributes": {},
+                  "Characters": [],
+                  "Items": [
+                           {
+                              "Id": "Wizard_stick",
+                              "Attributes": {},
+                              "Characters": [],
+                              "Items": []
+                            }
+                    ],
+                "Narration": []
+                }
+              ],
+              "Items": [],
+              "Connections": []
+            },
+            {
+              "Id": "Anywhere",
+              "Characters": [
+                {
+                  "Name": "Ship_guard"
+                }
+              ]
+            }
+          ]
+        },
+        "R_Side": {},
+        "Preconditions": [],
+        "Instructions": [
+          {
+            "op": "create",
+            "in": "Main_hero/Narration",
+            "sheaf": {
+              "Name": "Black_wizard_take_ship",
+              "Attributes": {
+                    "knowledge": "Hero know that..."
+              }
+            }
+          },
+          {
+            "op": "move",
+            "node": "Ship_guard",
+            "to": "Port/Characters"
+          }
+        ]
+    },
+
+    {
+      "Title": "Trying to discuss with ship captain / Próba rozmowy z kapitanem statku",
+      "Title_Generic": "Getting knowledge from conversation / Rozmowa z przekazaniem informacji",
+      "Description": "...",
+      "Override": 0,
+      "L_Side": {
+        "Locations": [
+          {
+            "Id": "Ship",
+            "Attributes": {},
+            "Characters": [
+              {
+                "Id": "Main_hero",
+                "Attributes": {},
+                "Characters": [],
+                "Items": [
+                         {
+                            "Id": "Wizard_stick",
+                            "Attributes": {},
+                            "Characters": [],
+                            "Items": []
+                          }
+                ],
+              "Narration": [
+                {
+                  "Id": "Black_wizard_take_ship",
+                  "Attributes": {
+                    "Knowledge": "Hero know that..."
+                  },
+                  "Characters": [],
+                  "Items": []
+                }
+                ]
+              },
+              {
+                "Id": "Ship_captain",
+                "Attributes": {},
+                "Characters": [],
+                "Items": []
+              }
+            ],
+            "Items": [],
+            "Connections": []
+          }
+        ]
+      },
+      "R_Side": {},
+      "Preconditions": [],
+      "Instructions": [
+        {
+          "op": "set",
+          "attribute": "Main_hero.IsDead",
+          "value": true
+        },
+        {
+          "op": "move",
+          "nodes": "Main_hero/Items/*",
+          "to": "Ship/Items"
+        }
+      ]
     },
             
     {
@@ -324,13 +439,23 @@
                   "HP": null
                 },
                 "Items": [
-                             {
-                              "Name": "Wizard_stick",
-                              "Attributes": {
-                              },
-                              "Characters": [],
-                              "Items": []
-                          }
+                  {
+                    "Name": "Wizard_stick",
+                    "Attributes": {
+                    },
+                    "Characters": [],
+                    "Items": []
+                  }
+                ],
+                "Narration": [
+                {
+                  "Id": "Black_wizard_take_ship",
+                  "Attributes": {
+                    "Knowledge": "..."
+                  },
+                  "Characters": [],
+                  "Items": []
+                }
                 ]
               },
               {
@@ -359,7 +484,11 @@
           "attribute": "Black_wizard.IsDead",
           "value": true
         },
-       {
+        {
+          "op": "delete",
+          "node": "Main_hero/Narration/Black_wizard_take_ship"
+        },
+        {
           "op": "create",
           "in": "Main_hero/Narration",
           "sheaf": {
@@ -368,7 +497,7 @@
               "Knowledge": "Captain..."
             }
           }
-      },
+        },
         {
           "op": "set",
           "attribute": "Main_hero.HP",
