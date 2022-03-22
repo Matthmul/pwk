@@ -8,26 +8,23 @@
       "Locations": [
         {
           "Name": "Port",
-          "Attributes": {},
           "Characters": [
             {
               "Name": "Main_hero",
-              "Attributes": {},
-              "Characters": [],
               "Items": [
                        {
-                          "Name": "Wizard_stick",
-                          "Attributes": {},
-                          "Characters": [],
-                          "Items": []
+                          "Name": "Wizard_stick"
                         }
                 ],
-            "Narration": [],
             "IsObject": true
+            },
+            {
+              "Name": "Black_wizard",
+              "Attributes": {
+                  "GateToShip": false
+              }
             }
-          ],
-          "Items": [],
-          "Connections": []
+          ]
         },
         {
           "Id": "Anywhere",
@@ -40,7 +37,6 @@
       ]
     },
     "RSide": {},
-    "Preconditions": [],
     "Instructions": [
       {
         "Op": "create",
@@ -56,6 +52,11 @@
         "Op": "move",
         "Nodes": "Ship_guard",
         "To": "Port/Characters"
+      },
+      {
+        "Op": "set",
+        "Attribute": "Black_wizard.GateToShip",
+        "Value": true
       }
     ]
   },
@@ -63,55 +64,35 @@
   {
     "Title": "Trying to discuss with ship captain / Próba rozmowy z kapitanem statku",
     "TitleGeneric": "Getting knowledge from conversation / Rozmowa z przekazaniem informacji",
-    "Description": "Podczas próby kontaktu z kapitanem główny bohater zostaje zabity przez Czarnego czarodzieja.",
+    "Description": "Możliwość kontaktu z kapitanem w («Loc») okazuje się zasadzką przygotowaną przez czarnego czarodzieja (Black_wizard). Główny bohater zostaje nadziany na magiczny pal i umiera.",
     "Override": 0,
     "LSide": {
       "Locations": [
         {
-          "Name": "Port",
-          "Attributes": {},
+          "Id": "Loc",
           "Characters": [
             {
               "Name": "Main_hero",
-              "Attributes": {},
-              "Characters": [],
               "Items": [
-                       {
-                          "Name": "Wizard_stick",
-                          "Attributes": {},
-                          "Characters": [],
-                          "Items": []
-                        }
+                {
+                  "Name": "Wizard_stick"
+                }
               ],
-            "Narration": [
-              {
-                "Name": "Black_wizard_takes_ship",
-                "Attributes": {
-                  "Knowledge": "Czarny czarodziej przejął statek"
-                },
-                "Characters": [],
-                "Items": []
-              }
+              "Narration": [
+                {
+                  "Name": "Black_wizard_takes_ship"
+                }
               ],
               "IsObject": true
             },
             {
-              "Name": "Ship_captain",
-              "Attributes": {},
-              "Characters": [],
-              "Items": []
+              "Name": "Ship_captain"
             }
-          ],
-          "Items": [],
-          "Connections": []
-        },
-        {
-          "Name": "Ship"
+          ]
         }
       ]
     },
     "RSide": {},
-    "Preconditions": [],
     "Instructions": [
       {
         "Op": "set",
@@ -121,7 +102,7 @@
       {
         "Op": "move",
         "Nodes": "Main_hero/Items/*",
-        "To": "Ship/Items"
+        "To": "Loc/Items"
       }
     ]
   },
@@ -135,18 +116,12 @@
       "Locations": [
         {
           "Id": "Anywhere",
-          "Attributes": {},
           "Characters": [
             {
               "Name": "Main_hero",
-              "Attributes": {},
-              "Characters": [],
               "Items": [
-                       {
-                            "Name": "Wizard_stick",
-                            "Attributes": {},
-                            "Characters": [],
-                            "Items": []
+                        {
+                          "Name": "Wizard_stick"
                         }
                 ],
             "Narration": [
@@ -157,27 +132,21 @@
             "IsObject": true
             },
             {
-              "Name": "Ship_guard",
-              "Attributes": {},
-              "Characters": [],
-              "Items": []
+              "Name": "Ship_guard"
             }
-          ],
-          "Items": [],
-          "Connections": []
+          ]
         }
       ]
     },
     "RSide": {},
-    "Preconditions": [],
     "Instructions": [
       {
         "Op": "create",
         "In": "Main_hero/Narration",
         "Sheaf": {
-          "Name": "Black_wizard_need_compass",
+          "Name": "Compass_needed_to_sail",
           "Attributes": {
-                "Knowledge": "Czarny czarodziej potrzebuje kompasu do wypłenięcia statkiem"
+                "Knowledge": "Do wypłynięcia statkiem potrzebny jest kompas"
           }
         }
       }
@@ -192,55 +161,33 @@
     "LSide": {
       "Locations": [
         {
-          "Name": "Port",
-          "Attributes": {},
+          "Id": "Loc",
           "Characters": [
             {
               "Name": "Main_hero",
-              "Attributes": {},
-              "Characters": [],
               "Items": [
-                         {
-                            "Name": "Compass",
-                            "Attributes": {
-                            },
-                            "Characters": [],
-                            "Items": []
+                        {
+                            "Name": "Compass"
                         },
-                       {
-                            "Name": "Wizard_stick",
-                            "Attributes": {
-                            },
-                            "Characters": [],
-                            "Items": []
+                        {
+                            "Name": "Wizard_stick"
                         }
                 ],
             "Narration": [
-                {
-                  "Name": "Black_wizard_need_compass",
-                  "Attributes": {
-                    "Knowledge": "Czarny czarodziej potrzebuje kompasu do wypłenięcia statkiem"
-                  },
-                  "Characters": [],
-                  "Items": []
-                }
+              {
+                "Name": "Black_wizard_takes_ship"                
+              }
               ],
               "IsObject": true
             },
             {
-              "Name": "Black_wizard",
-              "Attributes": {},
-              "Characters": [],
-              "Items": []
+              "Name": "Black_wizard"
             }
-          ],
-          "Items": [],
-          "Connections": []
+          ]
         }
       ]
     },
     "RSide": {},
-    "Preconditions": [],
     "Instructions": [
       {
         "Op": "create",
@@ -273,48 +220,30 @@
     "LSide": {
       "Locations": [
         {
-          "Name": "Port",
-          "Attributes": {},
+          "Id": "Loc",
           "Characters": [
             {
               "Name": "Main_hero",
-              "Attributes": {},
-              "Characters": [],
               "Items": [
                         {
-                            "Name": "Wizard_stick",
-                            "Attributes": {
-                            },
-                            "Characters": [],
-                            "Items": []
+                            "Name": "Wizard_stick"
                         }
               ],
               "Narration": [
                 {
-                  "Name": "Black_wizard_need_compass",
-                  "Attributes": {
-                    "Knowledge": "Czarny czarodziej potrzebuje kompasu do wypłenięcia statkiem"
-                  },
-                  "Characters": [],
-                  "Items": []
+                  "Name": "Black_wizard_takes_ship"
                 }
               ],
               "IsObject": true
             },
             {
-              "Name": "Black_wizard",
-              "Attributes": {},
-              "Characters": [],
-              "Items": []
+              "Name": "Black_wizard"
             }
-          ],
-          "Items": [],
-          "Connections": []
+          ]
         }
       ]
     },
     "RSide": {},
-    "Preconditions": [],
     "Instructions": [
       {
         "Op": "create",
@@ -332,13 +261,12 @@
   {
     "Title": "Fight with black wizard using the stick / Walka z czarnym czarodziejem przy pomocy kija",
     "TitleGeneric": "Fight ending with character’s death / Walka zakończona śmiercią uczestnika",
-    "Description": "Bohater z magicznym kijem łatwo pokonuje potężnego czarnego czarodzieja.",
+    "Description": "Bohater z magicznym kijem łatwo pokonuje potężnego czarnego czarodzieja, który umiera i uwalnia uwięzionego kapitana, który następnie udaje się niezwłocznie do swojej załogi.",
     "Override": 0,
     "LSide": {
       "Locations": [
         {
           "Id": "Loc",
-          "Attributes": {},
           "Characters": [
             {
               "Name": "Main_hero",
@@ -347,21 +275,12 @@
               },
               "Items": [
                 {
-                  "Name": "Wizard_stick",
-                  "Attributes": {
-                  },
-                  "Characters": [],
-                  "Items": []
+                  "Name": "Wizard_stick"
                 }
               ],
               "Narration": [
               {
-                "Name": "Black_wizard_takes_ship",
-                "Attributes": {
-                  "Knowledge": "Czarny czarodziej przejął statek"
-                },
-                "Characters": [],
-                "Items": []
+                "Name": "Black_wizard_takes_ship"
               }
               ],
               "IsObject": true
@@ -371,12 +290,9 @@
               "Attributes": {
                 "HP": null
               },
-              "Characters": [],
               "Items": []
             }
-          ],
-          "Items": [],
-          "Connections": []
+          ]
         }
       ]
     },
@@ -417,35 +333,23 @@
   {
     "Title": "Attempting to sail with a compass / Próba wypłynięcia z kompasem",
     "TitleGeneric": "Location change / Zmiana lokacji",
-    "Description": "Kapitan po uwolnieniu zauważa kompas w rękach głównego bohatera, przez co proponuje bohaterowi uczestnictwo w żegludze i zabiera bohatera na wyspę.",
+    "Description": "Kapitan przebywający w («Anywhere») po uwolnieniu zauważa kompas w rękach głównego bohatera, przez co proponuje bohaterowi uczestnictwo w żegludze i zabiera bohatera na wyspę.",
     "Override": 0,
     "LSide": {
       "Locations": [
         {
-          "Name": "Port",
-          "Attributes": {},
+          "Id": "Anywhere",
           "Characters": [
             {
               "Name": "Main_hero",
-              "Attributes": {},
-              "Characters": [],
               "Items": [
                        {
-                            "Name": "Compass",
-                            "Attributes": {
-                            },
-                            "Characters": [],
-                            "Items": []
+                            "Name": "Compass"
                         }
               ],
             "Narration": [
                 {
-                  "Name": "Captain_gratitude",
-                  "Attributes": {
-                    "Knowledge": "Kapitan jest wdzięczny za uratowanie statku"
-                  },
-                  "Characters": [],
-                  "Items": []
+                  "Name": "Captain_gratitude"
                 }
               ],
               "IsObject": true
@@ -457,8 +361,7 @@
           "Items": []
         },
         {
-          "Name": "Ship",
-          "Connections": []
+          "Name": "Ship"
         }
       ]
     },
@@ -480,33 +383,26 @@
   {
     "Title": "Attempting to sail without a compass / Próba wypłynięcia bez kompasu",
     "TitleGeneric": "Knowledge loss / Utrata wiedzy fabularnej",
-    "Description": "Kapitan po uwolnieniu z wdzięczności proponuje udział w żegludze, jednak zaznacza, że bez kompasu jest ona niemożliwa.",
+    "Description": "Kapitan po uwolnieniu z wdzięczności proponuje udział w żegludze, jednak widząc, że bohater nie ma kompasu odchodzi bez słowa.",
     "Override": 0,
     "LSide": {
       "Locations": [
         {
-          "Name": "Port",
-          "Attributes": {},
+          "Id": "Loc",
           "Characters": [
             {
               "Name": "Main_hero",
-              "Attributes": {},
-              "Characters": [],
-              "Items": [],
                 "Narration": [
                 {
-                  "Name": "Captain_gratitude",
-                  "Attributes": {
-                    "Knowledge": "Kapitan jest wdzięczny za uratowanie statku"
-                  },
-                  "Characters": [],
-                  "Items": []
+                  "Name": "Captain_gratitude"
                 }
               ],
               "IsObject": true
+            },
+            {
+              "Name": "Ship_captain"
             }
-          ],
-          "Items": []
+          ]
         }
       ]
     },
@@ -528,37 +424,23 @@
       "Locations": [
         {
           "Name": "Port",
-          "Attributes": {},
           "Characters": [
             {
               "Name": "Main_hero",
-              "Attributes": {},
-              "Characters": [],
-              "Items": [],
               "Narration": [
                   {
-                    "Name": "Main_hero_agreed_to_join_black_wizard",
-                    "Attributes": {
-                      "Knowledge": "Główny bohater dołączył do Czarnego Czardzieja"
-                    },
-                    "Characters": [],
-                    "Items": []
+                    "Name": "Main_hero_agreed_to_join_black_wizard"
                   }
                 ],
                 "IsObject": true
             },
             {
-              "Name": "Black_wizard",
-              "Attributes": {},
-              "Characters": [],
-              "Items": []
+              "Name": "Black_wizard"
             }
-          ],
-          "Items": []
+          ]
         },
         {
-          "Name": "Ship",
-          "Connections": []
+          "Name": "Ship"
         }
       ]
     },
