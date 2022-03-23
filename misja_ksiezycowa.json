@@ -2,7 +2,7 @@
   {
     "Title": "Black wizard takes over ship when main characer came into port / Czarny czarodziej przejmuje statek kiedy bohater wchodzi do portu",
     "TitleGeneric": "Knowledge creation / Utworzenie wiedzy fabularnej",
-    "Description": "Czarny czarodziej zamyka kapitana i przejmuje cały statek. Jednakże udaje się jednemu strażnikowi zbiec do innej lokacji («Anywhere»).",
+    "Description": "Czarny czarodziej zamyka kapitana i przejmuje cały statek, jednakże udaje się jednemu strażnikowi zbiec z («Anywhere») do sąsiedniej lokacji (Port).",
     "Override": 0,
     "LSide": {
       "Locations": [
@@ -19,10 +19,7 @@
             "IsObject": true
             },
             {
-              "Name": "Black_wizard",
-              "Attributes": {
-                  "GateToShip": false
-              }
+              "Name": "Black_wizard"
             }
           ]
         },
@@ -37,6 +34,12 @@
       ]
     },
     "RSide": {},
+    "Preconditions": [
+      {
+        "Count": "Black_wizard/Narration/Black_wizard_takes_ship", 
+        "Max": 0
+      }
+    ],
     "Instructions": [
       {
         "Op": "create",
@@ -54,16 +57,21 @@
         "To": "Port/Characters"
       },
       {
-        "Op": "set",
-        "Attribute": "Black_wizard.GateToShip",
-        "Value": true
+        "Op": "create",
+        "In": "Black_wizard/Narration",
+        "Sheaf": {
+          "Name": "Black_wizard_takes_ship",
+          "Attributes": {
+                "Knowledge": "Czarny czarodziej przejął statek"
+          }
+        }
       }
     ]
   },
 
   {
     "Title": "Trying to discuss with ship captain / Próba rozmowy z kapitanem statku",
-    "TitleGeneric": "Getting knowledge from conversation / Rozmowa z przekazaniem informacji",
+    "TitleGeneric": "Character’s death / Śmierć bohatera",
     "Description": "Możliwość kontaktu z kapitanem w («Loc») okazuje się zasadzką przygotowaną przez czarnego czarodzieja (Black_wizard). Główny bohater zostaje nadziany na magiczny pal i umiera.",
     "Override": 0,
     "LSide": {
@@ -109,8 +117,8 @@
             
   {
     "Title": "Discussion with ship guard / Rozmowa ze strażnikiem",
-    "TitleGeneric": "Getting knowledge from conversation / Rozmowa z przekazaniem informacji",
-    "Description": "Główny bohater podczas rozmowy ze zbiegłym strażnikiem statku, dowiaduje się, że do wypłynięcia Czarodziejowi (Black_wizard) niezbędny jest kompas.",
+    "TitleGeneric": "Knowledge creation / Utworzenie wiedzy fabularnej",
+    "Description": "Główny bohater podczas rozmowy ze zbiegłym strażnikiem statku dowiaduje się, że do wypłynięcia Czarodziejowi (Black_wizard) niezbędny jest kompas.",
     "Override": 0,
     "LSide": {
       "Locations": [
@@ -188,10 +196,26 @@
       ]
     },
     "RSide": {},
+    "Preconditions": [
+      {
+        "Count": "Black_wizard/Narration/Main_hero_agreed_to_join_black_wizard", 
+        "Max": 0
+      }
+    ],
     "Instructions": [
       {
         "Op": "create",
         "In": "Main_hero/Narration",
+        "Sheaf": {
+          "Name": "Main_hero_agreed_to_join_black_wizard",
+          "Attributes": {
+            "Knowledge": "Główny bohater dołączył do Czarnego Czardzieja"
+          }
+        }
+      },
+      {
+        "Op": "create",
+        "In": "Black_wizard/Narration",
         "Sheaf": {
           "Name": "Main_hero_agreed_to_join_black_wizard",
           "Attributes": {
@@ -213,55 +237,9 @@
   },
     
   {
-    "Title": "Refusal to join black wizard / Odmówienie na dołączenie do czarnego czarodzieja",
-    "TitleGeneric": "Knowledge creation / Utworzenie wiedzy fabularnej",
-    "Description": "Główny bohater mimo namów nie decyduje się przejść na stronę Czarodzieja (Black_wizard). Tym samym spada na głównego bohatera gniew złego maga.",
-    "Override": 0,
-    "LSide": {
-      "Locations": [
-        {
-          "Id": "Loc",
-          "Characters": [
-            {
-              "Name": "Main_hero",
-              "Items": [
-                        {
-                            "Name": "Wizard_stick"
-                        }
-              ],
-              "Narration": [
-                {
-                  "Name": "Black_wizard_takes_ship"
-                }
-              ],
-              "IsObject": true
-            },
-            {
-              "Name": "Black_wizard"
-            }
-          ]
-        }
-      ]
-    },
-    "RSide": {},
-    "Instructions": [
-      {
-        "Op": "create",
-        "In": "Main_hero/Narration",
-        "Sheaf": {
-          "Name": "Main_hero_refuse_to_join_black_wizard",
-          "Attributes": {
-            "Knowledge": "Główny bohater nie dołączył do Czarnego Czardzieja"
-          }
-        }
-      }
-    ]
-  },
-    
-  {
     "Title": "Fight with black wizard using the stick / Walka z czarnym czarodziejem przy pomocy kija",
     "TitleGeneric": "Fight ending with character’s death / Walka zakończona śmiercią uczestnika",
-    "Description": "Bohater z magicznym kijem łatwo pokonuje potężnego czarnego czarodzieja, który umiera i uwalnia uwięzionego kapitana, który następnie udaje się niezwłocznie do swojej załogi.",
+    "Description": "Bohater z magicznym kijem łatwo pokonuje potężnego czarnego czarodzieja, który umiera, i uwalnia uwięzionego kapitana, który następnie udaje się niezwłocznie do swojej załogi.",
     "Override": 0,
     "LSide": {
       "Locations": [
@@ -305,7 +283,7 @@
       },
       {
         "Op": "delete",
-        "Nodes": "Black_wizard_takes_ship"
+        "Nodes": "Loc/**/Narration/Black_wizard_takes_ship"
       },
       {
         "Op": "create",
@@ -333,7 +311,7 @@
   {
     "Title": "Attempting to sail with a compass / Próba wypłynięcia z kompasem",
     "TitleGeneric": "Location change / Zmiana lokacji",
-    "Description": "Kapitan przebywający w («Anywhere») po uwolnieniu zauważa kompas w rękach głównego bohatera, przez co proponuje bohaterowi uczestnictwo w żegludze i zabiera bohatera na wyspę.",
+    "Description": "Kapitan przebywający w («Anywhere») po uwolnieniu zauważa kompas w rękach głównego bohatera, przez co proponuje bohaterowi uczestnictwo w żegludze i zabiera bohatera do zamorskiej krainy.",
     "Override": 0,
     "LSide": {
       "Locations": [
@@ -358,7 +336,11 @@
               "Name": "Ship_captain"
             }
           ],
-          "Items": []
+          "Connections": [
+            {
+              "Destination": "Ship"
+            }
+          ]
         },
         {
           "Name": "Ship"
@@ -383,7 +365,7 @@
   {
     "Title": "Attempting to sail without a compass / Próba wypłynięcia bez kompasu",
     "TitleGeneric": "Knowledge loss / Utrata wiedzy fabularnej",
-    "Description": "Kapitan po uwolnieniu z wdzięczności proponuje udział w żegludze, jednak widząc, że bohater nie ma kompasu odchodzi bez słowa.",
+    "Description": "Kapitan przebywający w («Anywhere») po uwolnieniu z wdzięczności proponuje udział w żegludze, jednak widząc, że bohater nie ma kompasu odchodzi bez słowa.",
     "Override": 0,
     "LSide": {
       "Locations": [
@@ -392,7 +374,7 @@
           "Characters": [
             {
               "Name": "Main_hero",
-                "Narration": [
+              "Narration": [
                 {
                   "Name": "Captain_gratitude"
                 }
@@ -416,9 +398,9 @@
   },
 
   {
-    "Title": "Sail to the island with the black wizard / Wypłynięcie na wyspę z czarnym czarodziejem",
+    "Title": "Sail to the island with the black wizard / Wypłynięcie do zamorskiej krainy z czarnym czarodziejem",
     "TitleGeneric": "Location change / Zmiana lokacji",
-    "Description": "Czarny Czarodziej wraz z głównym bohaterem wypływają z portu w celu szerzenia ideologii Czerwonej Rasy na wyspie.",
+    "Description": "Czarny Czarodziej wraz z głównym bohaterem wypływają z portu w celu szerzenia ideologii Czerwonej Rasy w zamorskiej krainie.",
     "Override": 0,
     "LSide": {
       "Locations": [
@@ -436,6 +418,11 @@
             },
             {
               "Name": "Black_wizard"
+            }
+          ],
+          "Connections": [
+            {
+              "Destination": "Ship"
             }
           ]
         },
